@@ -1,9 +1,9 @@
 import pygame, sys
-from player import Player
-import obstacle
-from alien import Alien, Extra
+from code.player import Player
+import code.obstacle as obstacle
+from code.alien import Alien, Extra
 from random import choice, randint
-from laser import Laser
+from code.laser import Laser
 from os.path import join, dirname
 
 class Game:
@@ -15,11 +15,11 @@ class Game:
         # health and score setup
         self.lives = 3
         base_path = dirname(__file__)
-        player_img_path = join(base_path, '..', 'graphics', 'player.png')
+        player_img_path = join(base_path, 'graphics', 'player.png')
         self.live_surf = pygame.image.load(player_img_path).convert_alpha()
         self.live_x_start_pos = screen_width - (self.live_surf.get_size()[0] * 2 + 20)
         self.score = 0
-        font_path = join(base_path, '..', 'font', 'Pixeled.ttf')
+        font_path = join(base_path, 'font', 'Pixeled.ttf')
         self.font = pygame.font.Font(font_path, 20)
 
         # obstacle setup
@@ -42,19 +42,19 @@ class Game:
 
         # Audio
         base_path = dirname(__file__)
-        music_path = join(base_path, '..', 'audio', 'music.wav' )
+        music_path = join(base_path, 'audio', 'music.wav' )
 
         pygame.mixer.music.load(music_path)
         pygame.mixer.music.set_volume(0.05)
         pygame.mixer.music.play(loops = -1)
 
         # laser sound effect
-        laser_sound_path = join(base_path, '..', 'audio', 'laser.wav')
+        laser_sound_path = join(base_path, 'audio', 'laser.wav')
         self.laser_sound = pygame.mixer.Sound(laser_sound_path)
         self.laser_sound.set_volume(0.5)
 
         # explosion sound effect
-        explosion_sound_path = join(base_path, '..', 'audio', 'explosion.wav')
+        explosion_sound_path = join(base_path, 'audio', 'explosion.wav')
         self.explosion_sound = pygame.mixer.Sound(explosion_sound_path)
         self.explosion_sound.set_volume(0.3)
 
@@ -116,7 +116,7 @@ class Game:
             for laser in self.player.sprite.lasers:
                 # obstacle collisions
                 if pygame.sprite.spritecollide(laser, self.blocks, True):
-                    laser.kill() 
+                    laser.kill()
 
                 # alien collisions
                 aliens_hit = pygame.sprite.spritecollide(laser, self.aliens, True)
@@ -193,7 +193,7 @@ class Game:
 class CRT:
     def __init__(self):
         base_path = dirname(__file__)
-        tv_path = join(base_path, '..', 'graphics', 'tv.png')
+        tv_path = join(base_path, 'graphics', 'tv.png')
         self.tv = pygame.image.load(tv_path).convert_alpha()
         self.tv = pygame.transform.scale(self.tv, (screen_width, screen_height))
 

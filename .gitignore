@@ -1,0 +1,10 @@
+# python auto-generated files
+__pycache__
+
+# IDE stuff
+.vscode
+.idea
+
+# pyinstaller garbage
+build/*
+dist/*
